@@ -37,3 +37,19 @@ for port in range(port_min, port_max +1 ): # Creates a TCP socket
 
     for port in open_ports:
         print(f"Port {port} is open on {ip_add_entered}")
+
+filename = f"scan_results_{ip_add_entered}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+with open(filename, 'w') as f:
+    f.write(f"Port Scan Results\n")
+    f.write(f"Target IP: {ip_add_entered}\n")
+    f.write(f"Port Range: {port_min}-{port_max}\n")
+    f.write(f"Scan Date/Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    f.write(f"Total Open Ports: {len(open_ports)}\n")
+    f.write("=" * 50 + "\n")
+    if open_ports:
+        for port in open_ports:
+            f.write(f"Port {port} is open\n")
+    else:
+        f.write("No open ports found\n")
+
+print(f"\nResults saved to {filename}")
